@@ -1,0 +1,90 @@
+ability-settings:
+  lovers-ability:
+    lovers-activation-chance: 25 # Chance for the ability to activate
+    proc-chance: 25 # The chance to get extra hearts while ability is active
+    lovers-time: 30 # How long lovers ability should last
+    max-extra-hearts: 5.0 # The max amount of hearts lovers can give.
+    hearts-per-proc: 1.0 # The amount of hearts to give when proc-chance is successful.
+    lovers-msg: '&f&l*&d&l*&f&l* &d&lLOVERS ACTIVATION &f&l*&d&l*&f&l*'
+    lovers-proc-msg: '&f&l*&d&l*&f&l* &d&lLOVERS HEARTS &f&l*&d&l*&f&l*'
+
+misc-settings:
+  heroic-armor-per-piece: 2.5    # % damage reduction per heroic armor piece
+  rainbow-armor-per-piece: 3.75  # % damage reduction per rainbow armor piece
+  heroic-weapon-bonus: 27.5      # % extra damage for heroic weapons
+  diamond-hook-bonus: 50.0       # % extra damage for diamond hooks
+  heroic-hook-bonus: 70.0        # % extra damage for heroic hooks
+
+armorset-settings:
+  alchemist:
+    incoming: 0.0
+    outgoing: 0.0
+  blizzard:
+    incoming: 15.0 # Damage reduction
+    outgoing: 35.0 # Damage increase
+  colossal:
+    incoming: 5.0
+    outgoing: 10.0
+  diablo:
+    incoming: 10.0
+    outgoing: 22.5
+  fortune:
+    incoming: 0.0
+    outgoing: 0.0
+  inferno:
+    incoming: 17.5
+    outgoing: 17.5
+  koth:
+    incoming: 15.0
+    outgoing: 12.5
+  leviathan:
+    incoming: 7.5
+    outgoing: 12.5
+  lucky:
+    incoming: 12.5
+    outgoing: 25.0
+  magma:
+    incoming: 12.5
+    outgoing: 30.0
+  marksman:
+    incoming: 5.0
+    outgoing: 0.0
+  nova:
+    incoming: 15.0
+    outgoing: 15.0
+  orc:
+    incoming: 2.5
+    outgoing: 6.0
+  pirate:
+    incoming: 0.0
+    outgoing: 10.0
+  rogue:
+    incoming: 5.0
+    outgoing: 0.0
+  rover:
+    incoming: 17.5
+    outgoing: 10.0
+  warden:
+    incoming: 5.0
+    outgoing: 0.0
+  wraith:
+    incoming: 12.5
+    outgoing: 25.0
+  lovers:
+    incoming: 10.0
+    outgoing: 27.5
+  antic:
+    incoming: 10.0
+    outgoing: 0.0
+  serpent:
+    incoming: 0.0
+    outgoing: 15.0
+  mermaid:
+    incoming: 5.0
+    outgoing: 5.0
+  relic:
+    incoming: 0.0
+    outgoing: 5.0
+  demonic:
+    incoming: 20.0
+    outgoing: 15.0

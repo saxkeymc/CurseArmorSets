@@ -1,0 +1,7 @@
+name: CurseArmorSets
+version: 1.0
+main: org.minecurse.armorsets.ArmorSetPlugin
+authors: [Polar]
+description: ArmorSets
+depend: [CurseCommons, CurseFeatures]
+softdepend: [CurseEnchants]
