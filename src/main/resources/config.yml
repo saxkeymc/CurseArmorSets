@@ -52,11 +52,11 @@ armorset-settings:
   nova:
     incoming: 15.0
     outgoing: 15.0
-  orc:
+  goblin:
     incoming: 2.5
     outgoing: 6.0
     hidden: true  # Goblin set — hidden from /armorsets and /seteditor
-  pirate:
+  phantom:
     incoming: 0.0
     outgoing: 10.0
     hidden: true  # Phantom set — hidden from /armorsets and /seteditor

@@ -41,7 +41,7 @@ public class GoliathSet extends ArmorSet {
          "Goliath",
          "&9&lGoliath",
          ChatColor.BLUE,
-         new ItemBuilder(Material.DIAMOND_CHESTPLATE),
+         new ItemBuilder(Material.PRISMARINE_SHARD),
          defaultConfig.getArmorOutgoing("goliath"),
          defaultConfig.getArmorIncoming("goliath"),
          0.0,
@@ -51,10 +51,25 @@ public class GoliathSet extends ArmorSet {
 
    @Override
    public ItemStack buildArmor(ArmorPiece armorPiece) {
-      // Goliath is armor-only — no sword, axe, or bow.
-      if (armorPiece == ArmorPiece.SWORD || armorPiece == ArmorPiece.AXE || armorPiece == ArmorPiece.BOW) {
+      if (armorPiece == ArmorPiece.SWORD) {
+         // ── Goliath's Scythe (Diamond Sword) ─────────────────────────────
+         return this.addNBT(
+            new ItemBuilder(armorPiece.getDefaultMaterial())
+               .enchantment(Enchantment.DAMAGE_ALL, 5)
+               .enchantment(Enchantment.DURABILITY, 3)
+               .name(ColorUtil.translate(this.getPieceName(armorPiece)))
+               .lore(new String[]{
+                  "",
+                  "&9&lEffects:",
+                  "&f • Deal an extra 5% damage.",
+                  ""
+               }),
+            this.getInternalName()
+         );
+      } else if (armorPiece == ArmorPiece.AXE || armorPiece == ArmorPiece.BOW) {
          return null;
       } else {
+         // ── Armor pieces (Helmet / Chestplate / Leggings / Boots) ────────
          return this.addNBT(
             new ItemBuilder(armorPiece.getDefaultMaterial())
                .enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4)
@@ -68,12 +83,13 @@ public class GoliathSet extends ArmorSet {
                      "&7&ooverwhelming strength!",
                      "",
                      "&9&lEffects:",
-                     "&f • Deal an extra 10% damage to all enemies.",
+                     "&f • Deal an extra 5% damage.",
                      "&f • Enjoy a 5% damage reduction.",
                      "",
                      "&9&lAbility:",
                      "&fWhile wearing this set, you can unleash",
-                     "&fGoliath Outrage for 10 seconds.",
+                     "&fGoliath Outrage, greatly increasing your",
+                     "&fstrength for 10 seconds.",
                      ""
                   }
                ),
@@ -93,6 +109,8 @@ public class GoliathSet extends ArmorSet {
             return "&8» &9&lGoliath Leggings &8«";
          case BOOTS:
             return "&8» &9&lGoliath Boots &8«";
+         case SWORD:
+            return "&8» &9&lGoliath's Scythe &8«";
          default:
             return super.getPieceName(armorPiece);
       }

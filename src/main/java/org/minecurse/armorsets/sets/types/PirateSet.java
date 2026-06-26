@@ -37,8 +37,8 @@ public class PirateSet extends ArmorSet {
          "&c&lPhantom",
          ChatColor.RED,
          new ItemBuilder(Material.FLINT_AND_STEEL),
-         defaultConfig.getArmorOutgoing("pirate"),
-         defaultConfig.getArmorIncoming("pirate"),
+         defaultConfig.getArmorOutgoing("phantom"),
+         defaultConfig.getArmorIncoming("phantom"),
          0.0,
          0.0
       );

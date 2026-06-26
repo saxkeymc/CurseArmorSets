@@ -138,17 +138,21 @@ public class DefaultConfig {
    public void setHidden(String armorName, boolean hidden) {
       String lower = armorName.toLowerCase();
       DefaultConfig.CachedArmorSetValues existing = this.armorSetCache.get(lower);
-      if (existing != null) {
-         this.armorSetCache.put(lower, new DefaultConfig.CachedArmorSetValues(existing.getOutgoing(), existing.getIncoming(), hidden));
-         FileConfiguration config = this.plugin.getConfig();
-         if (hidden) {
-            config.set("armorset-settings." + lower + ".hidden", true);
-         } else {
-            config.set("armorset-settings." + lower + ".hidden", null);
-         }
-
-         this.plugin.saveConfig();
+      // If no existing cache entry, create one with 0 values so the hidden
+      // flag can still be set. This fixes the bug where toggling hidden on
+      // sets whose internal name didn't match the config key would silently
+      // fail (the if-existing != null guard would skip the entire method).
+      double outgoing = existing != null ? existing.getOutgoing() : 0.0;
+      double incoming = existing != null ? existing.getIncoming() : 0.0;
+      this.armorSetCache.put(lower, new DefaultConfig.CachedArmorSetValues(outgoing, incoming, hidden));
+      FileConfiguration config = this.plugin.getConfig();
+      if (hidden) {
+         config.set("armorset-settings." + lower + ".hidden", true);
+      } else {
+         config.set("armorset-settings." + lower + ".hidden", null);
       }
+
+      this.plugin.saveConfig();
    }
 
    public Set<String> getArmorSetNames() {

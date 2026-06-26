@@ -41,7 +41,7 @@ public class HavenSet extends ArmorSet {
          "Haven",
          "&5&lHaven",
          ChatColor.DARK_PURPLE,
-         new ItemBuilder(Material.DIAMOND_CHESTPLATE),
+         new ItemBuilder(Material.ENDER_PEARL),
          defaultConfig.getArmorOutgoing("haven"),
          defaultConfig.getArmorIncoming("haven"),
          0.0,
@@ -51,10 +51,25 @@ public class HavenSet extends ArmorSet {
 
    @Override
    public ItemStack buildArmor(ArmorPiece armorPiece) {
-      // Haven is armor-only — no sword, axe, or bow.
-      if (armorPiece == ArmorPiece.SWORD || armorPiece == ArmorPiece.AXE || armorPiece == ArmorPiece.BOW) {
+      if (armorPiece == ArmorPiece.AXE) {
+         // ── Haven's Axe (Diamond Axe) ────────────────────────────────────
+         return this.addNBT(
+            new ItemBuilder(armorPiece.getDefaultMaterial())
+               .enchantment(Enchantment.DAMAGE_ALL, 5)
+               .enchantment(Enchantment.DURABILITY, 3)
+               .name(ColorUtil.translate(this.getPieceName(armorPiece)))
+               .lore(new String[]{
+                  "",
+                  "&5&lEffects:",
+                  "&f • Each hit has a chance of healing you up.",
+                  ""
+               }),
+            this.getInternalName()
+         );
+      } else if (armorPiece == ArmorPiece.SWORD || armorPiece == ArmorPiece.BOW) {
          return null;
       } else {
+         // ── Armor pieces (Helmet / Chestplate / Leggings / Boots) ────────
          return this.addNBT(
             new ItemBuilder(armorPiece.getDefaultMaterial())
                .enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4)
@@ -68,14 +83,14 @@ public class HavenSet extends ArmorSet {
                      "&7&oeven the fiercest battles.",
                      "",
                      "&5&lEffects:",
-                     "&f • Deal an extra 5% damage to all enemies.",
+                     "&f • Deal an extra 5% damage.",
                      "&f • Enjoy a 10% damage reduction.",
                      "",
                      "&5&lAbility:",
                      "&fWhile wearing this set, you can activate",
-                     "&fHaven Blessing, instantly restoring yourself",
-                     "&fto full health while gaining additional",
-                     "&fdamage reduction for 10 seconds.",
+                     "&fHaven Blessing, instantly restoring your",
+                     "&fhealth while each hit has a chance of",
+                     "&fhealing you for 10 seconds.",
                      ""
                   }
                ),
@@ -95,6 +110,8 @@ public class HavenSet extends ArmorSet {
             return "&8» &5&lHaven Leggings &8«";
          case BOOTS:
             return "&8» &5&lHaven Boots &8«";
+         case AXE:
+            return "&8» &5&lHaven's Axe &8«";
          default:
             return super.getPieceName(armorPiece);
       }

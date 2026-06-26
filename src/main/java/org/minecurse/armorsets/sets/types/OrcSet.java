@@ -32,8 +32,8 @@ public class OrcSet extends ArmorSet {
          "&b&lGoblin",
          ChatColor.AQUA,
          new ItemBuilder(Material.EMERALD),
-         defaultConfig.getArmorOutgoing("orc"),
-         defaultConfig.getArmorIncoming("orc"),
+         defaultConfig.getArmorOutgoing("goblin"),
+         defaultConfig.getArmorIncoming("goblin"),
          5.0,
          0.0
       );
