@@ -47,6 +47,11 @@ public class ArmorSetEditorSection implements EditorSection {
          double incoming = config.getArmorIncoming(set.getInternalName());
          double outgoing = config.getArmorOutgoing(set.getInternalName());
          boolean hidden = config.isHidden(set.getInternalName());
+         // Skip hidden sets entirely — they should not appear in the editor
+         // list either, matching the /armorsets public menu behavior.
+         if (hidden) {
+            continue;
+         }
          String hiddenTag = hidden ? "&c&l[HIDDEN] " : "";
          GuiItem setItem = ItemBuilder.from(set.getDisplayMaterial().clone())
             .name(EditorMenuManager.legacyColor(hiddenTag + "&e&l" + set.getInternalName()))

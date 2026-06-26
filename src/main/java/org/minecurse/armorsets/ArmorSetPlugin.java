@@ -37,6 +37,8 @@ import org.minecurse.armorsets.sets.types.BlizzardSet;
 import org.minecurse.armorsets.sets.types.ColossalSet;
 import org.minecurse.armorsets.sets.types.DiabloSet;
 import org.minecurse.armorsets.sets.types.FortuneSet;
+import org.minecurse.armorsets.sets.types.GoliathSet;
+import org.minecurse.armorsets.sets.types.HavenSet;
 import org.minecurse.armorsets.sets.types.InfernoSet;
 import org.minecurse.armorsets.sets.types.KothSet;
 import org.minecurse.armorsets.sets.types.LeviathanSet;
@@ -168,7 +170,9 @@ public class ArmorSetPlugin extends JavaPlugin {
             new LuckySet(this.getDefaultConfig()),
             new NovaSet(this.getDefaultConfig()),
             new WardenSet(this.getDefaultConfig()),
-            new LoverSet(this.getDefaultConfig(), this)
+            new LoverSet(this.getDefaultConfig(), this),
+            new GoliathSet(this.getDefaultConfig()),
+            new HavenSet(this.getDefaultConfig())
          )
          .forEach(armorSet -> this.armorSetRegistry.registerArmorSet(armorSet));
    }

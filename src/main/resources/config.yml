@@ -55,9 +55,11 @@ armorset-settings:
   orc:
     incoming: 2.5
     outgoing: 6.0
+    hidden: true  # Goblin set — hidden from /armorsets and /seteditor
   pirate:
     incoming: 0.0
     outgoing: 10.0
+    hidden: true  # Phantom set — hidden from /armorsets and /seteditor
   rogue:
     incoming: 5.0
     outgoing: 0.0
@@ -88,3 +90,9 @@ armorset-settings:
   demonic:
     incoming: 20.0
     outgoing: 15.0
+  goliath:
+    incoming: 5.0   # 5% damage reduction
+    outgoing: 10.0  # 10% extra outgoing damage
+  haven:
+    incoming: 10.0  # 10% damage reduction
+    outgoing: 5.0   # 5% extra outgoing damage
