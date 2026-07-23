@@ -47,8 +47,6 @@ public class ArmorSetEditorSection implements EditorSection {
          double incoming = config.getArmorIncoming(set.getInternalName());
          double outgoing = config.getArmorOutgoing(set.getInternalName());
          boolean hidden = config.isHidden(set.getInternalName());
-         // Skip hidden sets entirely — they should not appear in the editor
-         // list either, matching the /armorsets public menu behavior.
          if (hidden) {
             continue;
          }

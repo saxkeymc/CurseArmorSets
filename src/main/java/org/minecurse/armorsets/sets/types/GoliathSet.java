@@ -29,11 +29,6 @@ import org.minecurse.commons.utils.RandomUtil;
 
 @ArmorCrystal(name = "Goliath", lore = "", outgoing = 10.0, incoming = 5.0, abilityChance = 5.0)
 public class GoliathSet extends ArmorSet {
-   /**
-    * Tracks the epoch-millis when Goliath Outrage expires for each player.
-    * While active, every attack the player makes deals an additional 10% damage
-    * (on top of the set's base +10% outgoing bonus).
-    */
    private final Map<UUID, Long> outrageExpiry = new HashMap<>();
 
    public GoliathSet(DefaultConfig defaultConfig) {
@@ -52,7 +47,6 @@ public class GoliathSet extends ArmorSet {
    @Override
    public ItemStack buildArmor(ArmorPiece armorPiece) {
       if (armorPiece == ArmorPiece.SWORD) {
-         // ── Goliath's Scythe (Diamond Sword) ─────────────────────────────
          return this.addNBT(
             new ItemBuilder(armorPiece.getDefaultMaterial())
                .enchantment(Enchantment.DAMAGE_ALL, 5)
@@ -69,7 +63,6 @@ public class GoliathSet extends ArmorSet {
       } else if (armorPiece == ArmorPiece.AXE || armorPiece == ArmorPiece.BOW) {
          return null;
       } else {
-         // ── Armor pieces (Helmet / Chestplate / Leggings / Boots) ────────
          return this.addNBT(
             new ItemBuilder(armorPiece.getDefaultMaterial())
                .enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4)
@@ -118,19 +111,14 @@ public class GoliathSet extends ArmorSet {
 
    @Override
    public void onAttack(Player armorHolder, LivingEntity attacked, EntityDamageByEntityEvent event) {
-      // ── Apply active Outrage bonus ──────────────────────────────────────
-      // If Outrage is currently active, deal an additional 10% damage on top
-      // of the base outgoing bonus that was already applied by the listener.
       Long expiry = this.outrageExpiry.get(armorHolder.getUniqueId());
       if (expiry != null && expiry > System.currentTimeMillis()) {
          double currentBase = event.getDamage(DamageModifier.BASE);
          event.setDamage(DamageModifier.BASE, currentBase * 1.10);
       } else if (expiry != null) {
-         // Expired — clean up the stale entry.
          this.outrageExpiry.remove(armorHolder.getUniqueId());
       }
 
-      // ── Roll for ability trigger ────────────────────────────────────────
       if (RandomUtil.getChance(5.0)) {
          Cooldown cooldown = this.getAbilityCooldowns().get(armorHolder.getUniqueId());
          if (cooldown == null || cooldown.isOver()) {
@@ -155,19 +143,11 @@ public class GoliathSet extends ArmorSet {
       }
    }
 
-   /**
-    * Activate Goliath Outrage — for the next 10 seconds, every attack the
-    * player makes deals an additional 10% damage. Also applies a brief
-    * Strength potion effect as visual feedback.
-    */
    private void procOutrage(Player player, LivingEntity target) {
       this.sendAbilityMessage(player, "&9&lGoliath Outrage", "{0}", player.getName());
       this.outrageExpiry.put(player.getUniqueId(), System.currentTimeMillis() + 10000L);
-      // Visual feedback — Strength II for 10 seconds (200 ticks).
       player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 200, 1), true);
 
-      // Schedule cleanup of the buff entry after 10 seconds so the map
-      // doesn't grow unbounded.
       ArmorSetPlugin.getInstance().getServer().getScheduler().runTaskLater(
          ArmorSetPlugin.getInstance(),
          () -> {
@@ -176,7 +156,7 @@ public class GoliathSet extends ArmorSet {
                this.outrageExpiry.remove(player.getUniqueId());
             }
          },
-         220L // 11 seconds — slightly after expiry to be safe
+         220L
       );
    }
 }

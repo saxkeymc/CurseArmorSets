@@ -138,10 +138,6 @@ public class DefaultConfig {
    public void setHidden(String armorName, boolean hidden) {
       String lower = armorName.toLowerCase();
       DefaultConfig.CachedArmorSetValues existing = this.armorSetCache.get(lower);
-      // If no existing cache entry, create one with 0 values so the hidden
-      // flag can still be set. This fixes the bug where toggling hidden on
-      // sets whose internal name didn't match the config key would silently
-      // fail (the if-existing != null guard would skip the entire method).
       double outgoing = existing != null ? existing.getOutgoing() : 0.0;
       double incoming = existing != null ? existing.getIncoming() : 0.0;
       this.armorSetCache.put(lower, new DefaultConfig.CachedArmorSetValues(outgoing, incoming, hidden));

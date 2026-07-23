@@ -166,7 +166,6 @@ public class HeroicArmorAPI {
                                return;
                             }
 
-                            // Skip rainbow conversion for leather-based star items (Flame Cloak, Ice Skates)
                             if (HeroicArmorAPI.this.hasLeatherStarItem(itemStack)) {
                                return;
                             }
@@ -333,7 +332,6 @@ public class HeroicArmorAPI {
                                }
                                
                                if (starItemEquipped) {
-                                  // Check if the star item's display material is leather armor (e.g. Flame Cloak, Ice Skates)
                                   ItemStack displayMat = starItem.getDisplayMaterial();
                                   boolean isLeatherDisplay = displayMat != null && (
                                      displayMat.getType() == Material.LEATHER_HELMET ||
@@ -343,10 +341,8 @@ public class HeroicArmorAPI {
                                   );
                                   
                                   if (isLeatherDisplay) {
-                                     // Leather star item (Flame Cloak, Ice Skates): skip entirely, StarItemUpdateTask handles the color
                                      org.bukkit.Bukkit.getLogger().fine("[CurseArmorSets] Skipping rainbow for leather star item: " + starItem.getName() + " on " + player.getName());
                                   } else {
-                                     // Non-leather star item (Springs = iron boots): send rainbow to inventory only
                                      int armorSlot = HeroicArmorAPI.this.getArmorSlotOfType(rainbowArmorInfo.getArmorType());
                                      if (armorSlot != -1) {
                                         HeroicArmorAPI.this.updateForPlayer(player, armorSlot, leatherCopy);
@@ -465,7 +461,6 @@ public class HeroicArmorAPI {
       }
    }
 
-
    public boolean isHeroicWeapon(ItemStack itemStack) {
       if (itemStack != null && itemStack.getType() != Material.AIR && itemStack.getAmount() > 0) {
          NBTItem item = new NBTItem(itemStack);
@@ -511,10 +506,6 @@ public class HeroicArmorAPI {
       }
    }
 
-   /**
-    * Returns true if this item has a star item whose display material is leather armor.
-    * Used to skip rainbow color conversion so the star item's own leather color is preserved.
-    */
    public boolean hasLeatherStarItem(ItemStack itemStack) {
       if (itemStack == null || itemStack.getType() == Material.AIR) return false;
       NBTItem nbt = new NBTItem(itemStack);

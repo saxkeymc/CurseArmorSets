@@ -29,11 +29,6 @@ import org.minecurse.commons.utils.RandomUtil;
 
 @ArmorCrystal(name = "Haven", lore = "", outgoing = 5.0, incoming = 10.0, abilityChance = 5.0)
 public class HavenSet extends ArmorSet {
-   /**
-    * Tracks the epoch-millis when Haven Blessing expires for each player.
-    * While active, the player takes an additional 5% less damage (on top of
-    * the set's base 10% incoming damage reduction).
-    */
    private final Map<UUID, Long> blessingExpiry = new HashMap<>();
 
    public HavenSet(DefaultConfig defaultConfig) {
@@ -52,7 +47,6 @@ public class HavenSet extends ArmorSet {
    @Override
    public ItemStack buildArmor(ArmorPiece armorPiece) {
       if (armorPiece == ArmorPiece.AXE) {
-         // ── Haven's Axe (Diamond Axe) ────────────────────────────────────
          return this.addNBT(
             new ItemBuilder(armorPiece.getDefaultMaterial())
                .enchantment(Enchantment.DAMAGE_ALL, 5)
@@ -69,7 +63,6 @@ public class HavenSet extends ArmorSet {
       } else if (armorPiece == ArmorPiece.SWORD || armorPiece == ArmorPiece.BOW) {
          return null;
       } else {
-         // ── Armor pieces (Helmet / Chestplate / Leggings / Boots) ────────
          return this.addNBT(
             new ItemBuilder(armorPiece.getDefaultMaterial())
                .enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4)
@@ -119,20 +112,14 @@ public class HavenSet extends ArmorSet {
 
    @Override
    public void onDamaged(Player armorHolder, LivingEntity damager, EntityDamageByEntityEvent event) {
-      // ── Apply active Blessing bonus ─────────────────────────────────────
-      // If Blessing is currently active, take an additional 5% less damage
-      // on top of the base incoming reduction that was already applied by
-      // the listener.
       Long expiry = this.blessingExpiry.get(armorHolder.getUniqueId());
       if (expiry != null && expiry > System.currentTimeMillis()) {
          double currentBase = event.getDamage(DamageModifier.BASE);
          event.setDamage(DamageModifier.BASE, currentBase * 0.95);
       } else if (expiry != null) {
-         // Expired — clean up the stale entry.
          this.blessingExpiry.remove(armorHolder.getUniqueId());
       }
 
-      // ── Roll for ability trigger ────────────────────────────────────────
       if (RandomUtil.getChance(5.0)) {
          Cooldown cooldown = this.getAbilityCooldowns().get(armorHolder.getUniqueId());
          if (cooldown == null || cooldown.isOver()) {
@@ -157,25 +144,15 @@ public class HavenSet extends ArmorSet {
       }
    }
 
-   /**
-    * Activate Haven Blessing — instantly heal the player to full HP and grant
-    * an additional 5% incoming damage reduction for the next 10 seconds.
-    * Also applies a brief Resistance potion effect as visual feedback.
-    */
    private void procBlessing(Player player, LivingEntity damager) {
       this.sendAbilityMessage(player, "&5&lHaven Blessing", "{0}", player.getName());
 
-      // Instantly heal to full HP.
       player.setHealth(player.getMaxHealth());
 
-      // Activate the 10-second damage reduction buff.
       this.blessingExpiry.put(player.getUniqueId(), System.currentTimeMillis() + 10000L);
 
-      // Visual feedback — Resistance I for 10 seconds (200 ticks).
       player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 200, 0), true);
 
-      // Schedule cleanup of the buff entry after 10 seconds so the map
-      // doesn't grow unbounded.
       ArmorSetPlugin.getInstance().getServer().getScheduler().runTaskLater(
          ArmorSetPlugin.getInstance(),
          () -> {
@@ -184,7 +161,7 @@ public class HavenSet extends ArmorSet {
                this.blessingExpiry.remove(player.getUniqueId());
             }
          },
-         220L // 11 seconds — slightly after expiry to be safe
+         220L
       );
    }
 }
