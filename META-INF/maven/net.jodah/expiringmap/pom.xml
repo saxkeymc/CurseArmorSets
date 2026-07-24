@@ -96,7 +96,7 @@
         </configuration>
       </plugin>
 
-      <!-- Coverage -->
+      
       <plugin>
         <groupId>org.eluder.coveralls</groupId>
         <artifactId>coveralls-maven-plugin</artifactId>

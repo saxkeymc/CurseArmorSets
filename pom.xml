@@ -81,7 +81,7 @@
     </build>
 
     <dependencies>
-        <!-- Aikar Command Lib -->
+        
         <dependency>
             <groupId>net.jodah</groupId>
             <artifactId>expiringmap</artifactId>
@@ -94,8 +94,8 @@
             <version>0.5.1-SNAPSHOT</version>
         </dependency>
 
-        <!-- Local JAR Dependencies -->
-        <!-- WineSpigot server (replaces server.jar) -->
+        
+        
         <dependency>
             <groupId>com.golfing8</groupId>
             <artifactId>WineSpigot</artifactId>
@@ -134,7 +134,7 @@
             <systemPath>${project.basedir}/Libs/CurseEnchants-1.0-SNAPSHOT.jar</systemPath>
         </dependency>
 
-        <!-- CurseExpansions (DamageTracker API) -->
+        
         <dependency>
             <groupId>com.asset</groupId>
             <artifactId>CurseExpansions</artifactId>
@@ -143,15 +143,15 @@
             <systemPath>${project.basedir}/Libs/CurseExpansions-1.0-SNAPSHOT-all.jar</systemPath>
         </dependency>
 
-        <!-- Project Lombok -->
-<!--        <dependency>-->
-<!--            <groupId>org.projectlombok</groupId>-->
-<!--            <artifactId>lombok</artifactId>-->
-<!--            <version>1.18.32</version>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
+        
 
-        <!-- NBTAPI (standalone, provided at runtime by server) -->
+
+
+
+
+
+
+        
         <dependency>
             <groupId>de.tr7zw</groupId>
             <artifactId>item-nbt-api-plugin</artifactId>
@@ -159,7 +159,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- PlaceholderAPI -->
+        
         <dependency>
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>
@@ -167,7 +167,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- WorldGuard -->
+        
         <dependency>
             <groupId>com.filoghost</groupId>
             <artifactId>WorldGuard</artifactId>
@@ -185,7 +185,7 @@
 
 
 
-        <!-- Factions -->
+        
         <dependency>
             <groupId>com.massivecraft</groupId>
             <artifactId>Factions</artifactId>
@@ -194,7 +194,7 @@
             <systemPath>${project.basedir}/Libs/Factions.jar</systemPath>
         </dependency>
 
-        <!-- Curse Commons -->
+        
         <dependency>
             <groupId>org.cursepvp.commons</groupId>
             <artifactId>CurseCommons</artifactId>
@@ -203,7 +203,7 @@
             <systemPath>${project.basedir}/Libs/CurseCommons-1.0-SNAPSHOT.jar</systemPath>
         </dependency>
 
-        <!-- EnchantmentAPI -->
+        
         <dependency>
             <groupId>com.rit.sucy</groupId>
             <artifactId>EnchantmentAPI</artifactId>
@@ -212,7 +212,7 @@
             <systemPath>${project.basedir}/Libs/EnchantmentAPI-1.0-SNAPSHOT.jar</systemPath>
         </dependency>
 
-        <!-- Triumph GUI -->
+        
         <dependency>
             <groupId>dev.triumphteam</groupId>
             <artifactId>triumph-gui</artifactId>
